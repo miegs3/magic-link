@@ -22,7 +22,11 @@ module Magic
             sign_in user
           elsif email && token
             flash[:alert] = "Your sign in token is invalid"
-            redirect_to magic_link.new_magic_link_path
+            if Magic::Link.invalid_token_redirect_path.present?
+              redirect_to Magic::Link.invalid_token_redirect_path
+            else
+              redirect_to magic_link.new_magic_link_path
+            end
           end
         end
 
