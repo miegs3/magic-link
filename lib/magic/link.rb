@@ -19,7 +19,7 @@ module Magic
 
     # Allow defining the redirect path if token is invalid
     mattr_accessor :invalid_token_redirect_path
-    @@invalid_token_redirect_path = magic_link.new_magic_link_path
+    @@invalid_token_redirect_path = nil
 
     class << self
       def configure
