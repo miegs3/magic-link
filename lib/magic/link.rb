@@ -13,6 +13,9 @@ module Magic
     mattr_accessor :token_expiration_hours
     @@token_expiration_hours = 6
 
+    mattr_accessor :multi_use_tokens
+    @@multi_use_tokens = false
+
     class << self
       def configure
         yield self

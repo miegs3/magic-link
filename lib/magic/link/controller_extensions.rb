@@ -16,7 +16,9 @@ module Magic
             flash.now[:alert] = "You are already signed in"
           elsif user && token_matches?(user) && token_not_expired?(user)
             flash[:notice] = "You have signed in successfully"
-            user.update_columns(sign_in_token: nil, sign_in_token_sent_at: nil)
+            unless Magic::Link.multi_use_tokens
+              user.update_columns(sign_in_token: nil, sign_in_token_sent_at: nil)
+            end
             sign_in user
           elsif email && token
             flash[:alert] = "Your sign in token is invalid"
